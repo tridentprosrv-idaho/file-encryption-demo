@@ -6,11 +6,12 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import ISEOProps from "./ISEOProps"
 
-function SEO({ description, lang, meta, title }) {
+function SEO(props: ISEOProps) {
+  const { description, lang, meta, title } = props
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -76,13 +77,6 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO
