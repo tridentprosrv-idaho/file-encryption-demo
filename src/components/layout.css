@@ -620,3 +620,24 @@ pre tt:after {
     font-size: 100%;
   }
 }
+.neutral-status, .loading-status, .error-status, .success-status {
+  font-size: larger;
+  font-weight: bold;
+}
+.error-status{
+  color: red;
+  font-style: italic;
+}
+.loading-status{
+  color: aqua;
+}
+
+.neutral-status{
+  color: darkgray;
+}
+.success-status{
+  color:green;
+}
+.loading{
+  height: 300px;
+}

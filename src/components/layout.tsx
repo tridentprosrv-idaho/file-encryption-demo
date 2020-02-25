@@ -5,15 +5,14 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
+import React, { useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.css"
 import ILayoutProps from "./ILayoutProps"
 
-const Layout = (props: ILayoutProps) => {
+export default function Layout(props: ILayoutProps): JSX.Element {
   const { children } = props
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -25,6 +24,16 @@ const Layout = (props: ILayoutProps) => {
     }
   `)
 
+  useEffect(()=>{
+    const msalScript  = document.createElement("script");
+    msalScript.src = "https://alcdn.msauth.net/lib/1.2.1/js/msal.js";
+    msalScript.async = true;
+    //msalScript.integrity="sha384-9TV1245fz+BaI+VvCjMYL0YDMElLBwNS84v3mY57pXNOt6xcUYch2QLImaTahcOP";
+    msalScript["crossorigin"]="anonymous";
+    
+    const headElement = document.getElementsByTagName("head")[0];
+    headElement.appendChild(msalScript);
+  }, [])
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
@@ -36,18 +45,8 @@ const Layout = (props: ILayoutProps) => {
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <footer>© {new Date().getFullYear()} Idaho Edokpayi</footer>
       </div>
     </>
   )
 }
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout

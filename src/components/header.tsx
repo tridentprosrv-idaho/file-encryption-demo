@@ -7,7 +7,7 @@ export default function Header(props: IHeaderProps): JSX.Element {
   return (
     <header
       style={{
-        background: `rebeccapurple`,
+        background: `#8B008B`,
         marginBottom: `1.45rem`,
       }}
     >
