@@ -22,4 +22,10 @@ describe("AppStatus", () => {
     const wrapper = shallow(<AppStatus status={AppStatusEnum.Success} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
     expect(wrapper.contains(<Success />)).toBe(true);
   });
+
+  it("AppStatus Renders form in initial status", () => {
+
+    const wrapper = shallow(<AppStatus status={AppStatusEnum.Initial} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
+    expect(wrapper.find("form")).toHaveLength(1);
+  });
 });
