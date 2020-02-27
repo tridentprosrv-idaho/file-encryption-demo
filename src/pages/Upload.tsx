@@ -4,7 +4,7 @@ import HandleSubmit from "../components/handleSubmit";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import UploadComponent from "../components/UploadComponent";
-const IndexPage = () => {
+const UploadPage = () => {
   const [statusClassName, setStatusClassName] = useState("neutral-status");
   const [statusMessage, setStatusMessage] = useState("Please Select Files");
   const [status, setStatus] = useState(AppStatusEnum.Initial);
@@ -28,7 +28,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Upload Files" />
       <UploadComponent
         status={status}
         statusClassName={statusClassName}
@@ -39,4 +39,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default UploadPage;

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import AppStatusEnum from "../components/AppStatusEnum";
-import HandleSubmit from "../components/handleSubmit";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import UploadComponent from "../components/UploadComponent";
-const IndexPage = () => {
+import DownloadComponent from "components/DownloadComponent";
+const DownloadPage = () => {
   const [statusClassName, setStatusClassName] = useState("neutral-status");
-  const [statusMessage, setStatusMessage] = useState("Please Select Files");
-  const [status, setStatus] = useState(AppStatusEnum.Initial);
+  const [statusMessage, setStatusMessage] = useState("Loading Files...");
+  const [status, setStatus] = useState(AppStatusEnum.Loading);
+  /*
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatusClassName("loading-status");
@@ -24,19 +24,18 @@ const IndexPage = () => {
         setStatusClassName("error-status");
         setStatusMessage("Error :" + JSON.stringify(reason));
       });
-  };
+  };*/
 
   return (
     <Layout>
-      <SEO title="Home" />
-      <UploadComponent
+      <SEO title="Download Files" />
+      <DownloadComponent
         status={status}
         statusClassName={statusClassName}
         statusMessage={statusMessage}
-        submitHandler={submitHandler}
       />
     </Layout>
   );
 };
 
-export default IndexPage;
+export default DownloadPage;

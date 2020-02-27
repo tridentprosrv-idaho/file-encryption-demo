@@ -1,31 +1,31 @@
 import React from "react";
 import { shallow } from 'enzyme';
-import AppStatus from "../AppStatus";
+import UploadComponent from "../UploadComponent";
 import AppStatusEnum from "../AppStatusEnum";
 import Fail from "../fail";
 import Loading from "../loading";
 import Success from "../success";
 
-describe("AppStatus", () => {
-  it("AppStatus Renders fail on error", () => {
+describe("UploadComponent", () => {
+  it("UploadComponent Renders fail on error", () => {
 
-    const wrapper = shallow(<AppStatus status={AppStatusEnum.Error} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
+    const wrapper = shallow(<UploadComponent status={AppStatusEnum.Error} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
     expect(wrapper.contains(<Fail />)).toBe(true);
   });
-  it("AppStatus Renders loading in loading status", () => {
+  it("UploadComponent Renders loading in loading status", () => {
 
-    const wrapper = shallow(<AppStatus status={AppStatusEnum.Loading} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
+    const wrapper = shallow(<UploadComponent status={AppStatusEnum.Loading} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
     expect(wrapper.contains(<Loading />)).toBe(true);
   });
-  it("AppStatus Renders success in success status", () => {
+  it("UploadComponent Renders success in success status", () => {
 
-    const wrapper = shallow(<AppStatus status={AppStatusEnum.Success} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
+    const wrapper = shallow(<UploadComponent status={AppStatusEnum.Success} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
     expect(wrapper.contains(<Success />)).toBe(true);
   });
 
-  it("AppStatus Renders form in initial status", () => {
+  it("UploadComponent Renders form in initial status", () => {
 
-    const wrapper = shallow(<AppStatus status={AppStatusEnum.Initial} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
+    const wrapper = shallow(<UploadComponent status={AppStatusEnum.Initial} statusClassName={""} statusMessage={""} submitHandler={()=>{}} />);
     expect(wrapper.find("form")).toHaveLength(1);
   });
 });

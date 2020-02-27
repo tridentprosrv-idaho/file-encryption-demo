@@ -4,23 +4,23 @@ import {
   newPipeline,
 } from "@azure/storage-blob";
 import IStoreBlob from "./IStoreBlob";
+import config from "../config.json";
 
 export default async function StoreBlob(props: IStoreBlob): Promise<void> {
   const { data } = props;
-  const account = "fileencryptiondemo";
-  const accountSas =
-    "?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2020-02-28T05:33:53Z&st=2020-02-27T21:33:53Z&spr=https&sig=IO8fzCjZ8fECMTPCU%2FIaGJ3BxLiFqhQLB4flikbtfUA%3D";
+  const account = config.account;
+  const accountSAS = config.accountSAS;
   const pipeline = newPipeline(new AnonymousCredential(), {
     // httpClient: MyHTTPClient, // A customized HTTP client implementing IHttpClient interface
     retryOptions: { maxTries: 4 }, // Retry options
-    userAgentOptions: { userAgentPrefix: "AdvancedSample V1.0.0" }, // Customized telemetry string
+    userAgentOptions: { userAgentPrefix: "FileEncryptionDemo V1.0.0" }, // Customized telemetry string
     keepAliveOptions: {
       // Keep alive is enabled by default, disable keep alive by setting false
       enable: false,
     },
   });
   const blobServiceClient = new BlobServiceClient(
-    `https://${account}.blob.core.windows.net${accountSas}`,
+    `https://${account}.blob.core.windows.net${accountSAS}`,
     pipeline
   );
 

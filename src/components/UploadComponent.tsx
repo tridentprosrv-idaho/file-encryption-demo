@@ -1,4 +1,4 @@
-import IAppStatusProps from "./IAppStatusProps";
+import IUploadComponentProps from "./IUploadComponentProps";
 import React from "react";
 import FileInputRef from "./FileInputRef";
 import AppStatusEnum from "./AppStatusEnum";
@@ -6,7 +6,7 @@ import Loading from "./loading";
 import Fail from "./fail";
 import Success from "./success";
 
-export default function AppStatus(props: IAppStatusProps): JSX.Element {
+export default function UploadComponent(props: IUploadComponentProps): JSX.Element {
   const { status, statusClassName, statusMessage, submitHandler } = props;
 
   let renderLogic: () => JSX.Element = () => (
