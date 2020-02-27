@@ -1,10 +1,15 @@
-import { AnonymousCredential, BlobServiceClient, ContainerItem, newPipeline } from "@azure/storage-blob";
+import {
+  AnonymousCredential,
+  BlobServiceClient,
+  newPipeline,
+} from "@azure/storage-blob";
 import IStoreBlob from "./IStoreBlob";
 
 export default async function StoreBlob(props: IStoreBlob): Promise<void> {
   const { data } = props;
   const account = "fileencryptiondemo";
-  const accountSas = "?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2020-02-28T01:37:10Z&st=2020-02-27T17:37:10Z&sip=172.18.108.209&spr=https,http&sig=ibJpF2yO9UYo4YjKLW6TX7lm500F6VWVILKiUNKCmrk%3D";
+  const accountSas =
+    "?sv=2019-02-02&ss=b&srt=sco&sp=rwdlac&se=2020-02-28T05:33:53Z&st=2020-02-27T21:33:53Z&spr=https&sig=IO8fzCjZ8fECMTPCU%2FIaGJ3BxLiFqhQLB4flikbtfUA%3D";
   const pipeline = newPipeline(new AnonymousCredential(), {
     // httpClient: MyHTTPClient, // A customized HTTP client implementing IHttpClient interface
     retryOptions: { maxTries: 4 }, // Retry options
@@ -19,31 +24,36 @@ export default async function StoreBlob(props: IStoreBlob): Promise<void> {
     pipeline
   );
 
-  const containerName = `demo`;
-  let demoContainer: ContainerItem | null = null;
-  let iter = await blobServiceClient.listContainers();
-  for await (const container of iter) {
-    if (container.name === containerName) {
-      demoContainer = container;
+  const containerName = "demo";
+
+  const containerClient = blobServiceClient.getContainerClient(containerName);
+  const exists = await containerClient.exists();
+  if (!exists) {
+    try {
+      const createContainerResponse = await containerClient.create();
+      console.log(
+        `Create container ${containerName} successfully`,
+        createContainerResponse.requestId
+      );
+    } catch (error) {
+      handleError(error, "Container creation problem: ");
     }
   }
-  const containerClient = blobServiceClient.getContainerClient(containerName);
-  if (null === demoContainer) {
-    // create container
-    // Create a container
 
-    const createContainerResponse = await containerClient.create();
-    console.log(
-      `Create container ${containerName} successfully`,
-      createContainerResponse.requestId
+  try {
+    const blobName = "newblob" + new Date().getTime();
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    const uploadBlobResponse = await blockBlobClient.upload(
+      data,
+      Buffer.byteLength(data)
     );
+    console.log("Uploaded data" + JSON.stringify(uploadBlobResponse));
+  } catch (error) {
+    handleError(error, "Blob creation problem: ");
   }
-
-  const blobName = "newblob" + new Date().getTime();
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-  const uploadBlobResponse = await blockBlobClient.upload(
-    data,
-    Buffer.byteLength(data)
-  );
-  console.log("Uploaded data" + JSON.stringify(uploadBlobResponse));
+}
+function handleError(error: any, messagePrefix: string) {
+  const errorMessage = messagePrefix + JSON.stringify(error);
+  console.log(errorMessage);
+  throw new Error(errorMessage);
 }
