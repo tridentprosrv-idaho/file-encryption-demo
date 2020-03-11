@@ -660,12 +660,11 @@ pre tt:after {
 .app-title > h1 {
   margin: 0;
 }
-.app-title a {
+.app-title a, .app-navigation li > a {
   color: white;
   text-decoration: none;
 }
-.app-navigation{  
-  font: bold .5vw sans-serif;
+.app-navigation{   
   padding-top: 40px;
 }
 .app-navigation ul {
@@ -676,11 +675,11 @@ pre tt:after {
 .app-navigation li {
   display: inline;
   list-style: none;
-  padding: 1px 2px;
+  padding: 1px 10px;
 }
-.app-navigation li > a{
-  color: white;
-  text-decoration: none;
+.app-navigation li > a
+{
+  font: bold 1vw sans-serif;
 }
 
 .app-navigation li:hover > a{
