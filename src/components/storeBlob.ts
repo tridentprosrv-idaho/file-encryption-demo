@@ -3,13 +3,13 @@ import {
   BlobServiceClient,
   newPipeline,
 } from "@azure/storage-blob";
+
 import IStoreBlob from "./IStoreBlob";
-import config from "../config.json";
 
 export default async function StoreBlob(props: IStoreBlob): Promise<void> {
   const { data } = props;
-  const account = config.account;
-  const accountSAS = config.accountSAS;
+  const account = process.env.GATSBY_AZURE_BLOB_ACCOUNT;//config.account;
+  const accountSAS = process.env.GATSBY_AZURE_BLOB_ACCOUNT_SAS;//config.accountSAS;
   const pipeline = newPipeline(new AnonymousCredential(), {
     // httpClient: MyHTTPClient, // A customized HTTP client implementing IHttpClient interface
     retryOptions: { maxTries: 4 }, // Retry options
@@ -53,7 +53,7 @@ export default async function StoreBlob(props: IStoreBlob): Promise<void> {
   }
 }
 function handleError(error: any, messagePrefix: string) {
-  const errorMessage = messagePrefix + JSON.stringify(error);
+  const errorMessage = messagePrefix + error.toString();
   console.log(errorMessage);
   throw new Error(errorMessage);
 }

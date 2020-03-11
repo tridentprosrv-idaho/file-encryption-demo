@@ -1,8 +1,8 @@
 import AppStatusEnum from "./AppStatusEnum";
-import { BlobItem } from "@azure/storage-blob";
+import IBlobDataUrl from "./IBlobDataUrl";
 
 export default interface IDownloadComponentProps{
-    blobs?: BlobItem[];
+    downloadData?: IBlobDataUrl[];
     statusClassName: string;
     statusMessage: string;
     status: AppStatusEnum;

@@ -620,24 +620,83 @@ pre tt:after {
     font-size: 100%;
   }
 }
-.neutral-status, .loading-status, .error-status, .success-status {
+.neutral-status,
+.loading-status,
+.error-status,
+.success-status {
   font-size: larger;
   font-weight: bold;
 }
-.error-status{
+.error-status {
   color: red;
   font-style: italic;
 }
-.loading-status{
+.loading-status {
   color: aqua;
 }
 
-.neutral-status{
+.neutral-status {
   color: darkgray;
 }
-.success-status{
-  color:green;
+.success-status {
+  color: green;
 }
-.loading{
+.loading {
   height: 300px;
+}
+.download-files {
+  margin: 5px 5px;
+}
+.download-files > iframe {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 100px;
+}
+
+.app-title {
+  margin: 0 auto;
+  padding: 1.45rem 1.0875rem;
+}
+.app-title > h1 {
+  margin: 0;
+}
+.app-title a {
+  color: white;
+  text-decoration: none;
+}
+.app-navigation{  
+  font: bold .5vw sans-serif;
+  padding-top: 40px;
+}
+.app-navigation ul {
+  margin: 0;
+  padding: 0 auto;
+  width: 100%;
+}
+.app-navigation li {
+  display: inline;
+  list-style: none;
+  padding: 1px 2px;
+}
+.app-navigation li > a{
+  color: white;
+  text-decoration: none;
+}
+
+.app-navigation li:hover > a{
+  text-decoration: underline;
+}
+header {
+  background: #8b008b;
+  margin-bottom: 1.45rem;
+}
+.container{
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 1.0875rem 1.45rem;
+}
+.header-container{
+  margin: 0 auto;
+  max-width: 960px; 
+  display: flex;
 }

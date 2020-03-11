@@ -2,11 +2,11 @@ import React  from "react";
 import AppStatusEnum from "./AppStatusEnum";
 import Loading from "./loading";
 import Fail from "./fail";
-import Success from "./success";
 import IDownloadComponentProps from "./IDownloadComponentProps";
+import IBlobDataUrl from "./IBlobDataUrl";
 
 export default function DownloadComponent(props: IDownloadComponentProps): JSX.Element {
-  const { blobs, status, statusClassName, statusMessage  } = props;
+  const { downloadData, status, statusClassName, statusMessage  } = props;
 
   let renderLogic: () => JSX.Element = () => <Loading />;
   switch (status) {
@@ -17,7 +17,14 @@ export default function DownloadComponent(props: IDownloadComponentProps): JSX.E
       renderLogic = () => <Fail />;
       break;
     case AppStatusEnum.Success:
-      renderLogic = () => <Success />;
+      renderLogic = () => downloadData.length > 0 ? <section className="download-files">
+        {
+          downloadData.map( (data:IBlobDataUrl, index:number)=> <article key={"download"+index.toString()}>
+            <h3>{data.name}</h3>
+            <iframe src={data.dataUrl} />
+          </article>)
+        }
+      </section>: <h2>No files to download</h2>;
       break;
     default:
       break;

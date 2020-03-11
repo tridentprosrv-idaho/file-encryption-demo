@@ -22,7 +22,7 @@ const IndexPage = () => {
       .catch((reason: any) => {
         setStatus(AppStatusEnum.Error);
         setStatusClassName("error-status");
-        setStatusMessage("Error :" + JSON.stringify(reason));
+        setStatusMessage("Error :" + reason.toString());
       });
   };
 
