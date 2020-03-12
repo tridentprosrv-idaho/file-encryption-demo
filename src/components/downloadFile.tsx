@@ -21,7 +21,7 @@ export default function DownloadFile(props: IDownloadFileProps): JSX.Element {
     case "application/pdf":
     case "text/plan":
     case "application/xhtml+xml":
-      case "text/html":
+    case "text/html":
       renderFile = renderIframe;
       break;
     case "audio/ogg":
@@ -52,8 +52,9 @@ export default function DownloadFile(props: IDownloadFileProps): JSX.Element {
         </video>
       );
       break;
-    case "":
-      renderFile =()=><code>{url}</code>
+    default:
+      renderFile = () => <a href={url}>{name}</a>;
+      break;
   }
 
   return (
