@@ -647,8 +647,7 @@ pre tt:after {
 .download-files {
   margin: 5px 5px;
 }
-.download-files > iframe {
-  width: 80%;
+.download-files > article > iframe {
   margin: 0 auto;
   min-height: 100px;
 }
